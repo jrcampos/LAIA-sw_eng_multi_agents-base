@@ -11,20 +11,35 @@ This tutorial teaches you how to use a multi-agent LLM system (powered by OpenHa
 You will interact with the system through a CLI menu in `my_agents.py`.
 
 ---
-
 # 🤖 What Is OpenHands?
 
-OpenHands is an **agentic framework** that allows Large Language Models to behave as structured software development agents.  
-Agents can read files, edit files, execute code, and reason in multi-step workflows — all under sandboxed, reproducible conditions.
+OpenHands is an **agentic framework** that enables LLMs to operate as structured software-development agents.  
+It provides controlled tool usage (file editing, terminal execution, reasoning loops) inside a reproducible sandbox.
 
-In this project, OpenHands powers:
+OpenHands comes in *multiple* forms, depending on how you want to use it:
 
-- The **Analyst Agent** → writes specifications  
-- The **Tester Agent** → generates pytest tests  
-- The **Coder Agent** → implements code based on tests  
-- The **Reviewer Agent** → evaluates code + tests + spec alignment  
+### 🖥️ 1. OpenHands Desktop GUI (Full Development Environment)
+- A full graphical environment where an AI agent edits your repository.
+- Includes a browser-based VS Code interface.
+- Best for manual experiments or interactive agent development.
 
-Each agent runs with a different system prompt and different tool permissions.
+### ☁️ 2. OpenHands Cloud (Hosted)
+- A managed online environment that runs agents remotely.
+- Useful when you need GPU acceleration or shared workspaces.
+- Same agent capabilities, but running in the cloud.
+
+### 🧩 3. OpenHands SDK (Programmatic / Library Mode)
+- A Python library (`openhands-sdk`, `openhands-tools`, `openhands-workspace`)
+- Allows you to **embed OpenHands agents into your own application**.
+- You define the agents, prompts, tools, and workflow.
+- Agents run inside a sandboxed workspace, fully controlled by your code.
+
+👉 **This tutorial uses the SDK version.**
+
+You are not opening the GUI.  
+You are not connecting to the cloud.
+
+Instead, the project integrates OpenHands **directly into Python code**. 
 
 ---
 
