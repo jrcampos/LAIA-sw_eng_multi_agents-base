@@ -132,7 +132,7 @@ You must create a `.env` file in the **project root** with the following structu
 # The name of the model you pulled into the remote Ollama server.
 # Example: ollama pull devstral
 # !NOTE: the context window needs to be large enough, e.g., 32k otherwise it will not properly configure the tool calls!
-LLM_MODEL=ollama/devstral:latest
+LLM_MODEL=ollama/devstral-32k:latest
 # LLM_MODEL=openai/gpt-4.1
 
 # The OpenAI-compatible API endpoint exposed by the remote Ollama container.
