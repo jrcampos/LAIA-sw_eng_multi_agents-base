@@ -1,0 +1,11 @@
+# --- OpenHands modular ecosystem ---
+openhands-sdk>=0.1.0          # Core agent abstractions (openhands.sdk)
+openhands-tools>=0.1.0        # FileEditorTool, SearchTool, etc. (openhands.tools)
+
+# --- Testing ---
+pytest>=8.0.0
+
+# --- Utilities ---
+python-dotenv>=1.0.0
+requests>=2.31.0
+
