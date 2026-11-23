@@ -1,1 +1,17 @@
+.env.idea/
+
+.idea/
+.env
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+
+# Secrets
 .env

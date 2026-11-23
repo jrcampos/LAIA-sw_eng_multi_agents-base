@@ -1,6 +1,7 @@
 # agents/common.py
 
 import os
+import base64
 import subprocess
 from pathlib import Path
 
@@ -72,16 +73,24 @@ def build_llm() -> LLM:
     base_url = os.getenv("LLM_API_BASE")
     api_key = os.getenv("LLM_API_KEY", "dummy")
 
+    username = os.getenv("OLLAMA_USERNAME")
+    password = os.getenv("OLLAMA_PASSWORD")
+
     if not model:
         raise RuntimeError("LLM_MODEL missing in environment variables")
     if not base_url:
         raise RuntimeError("LLM_API_BASE missing in environment variables")
+    if not username or not password:
+        raise RuntimeError("OLLAMA_USERNAME or OLLAMA_PASSWORD missing")
+
+    # HTTP Basic Authentication
+    auth = requests.auth.HTTPBasicAuth(username, password)
 
     # --- Minimal, quiet connectivity check ---
     try:
         # We just care that *something* is listening there.
         # Status code can be anything; this is only a reachability probe.
-        requests.get(base_url, timeout=2)
+        requests.get(base_url, auth=auth, timeout=2)
     except requests.exceptions.RequestException:
         # `from None` prevents the giant chained traceback from requests/urllib3
         raise RuntimeError(
@@ -89,11 +98,22 @@ def build_llm() -> LLM:
             "Is the server running and reachable from inside the container?"
         ) from None
 
-    # --- If reachable, build the LLM instance ---
+    # Generate Basic Auth header
+    credentials = f"{username}:{password}"
+    encoded = base64.b64encode(
+        credentials.encode("utf-8")
+    ).decode("ascii")
+
     return LLM(
         model=model,
         api_key=api_key,
-        base_url=base_url
+        base_url=base_url,
+        extra_headers={
+            "Authorization": f"Basic {encoded}"
+        },
+        litellm_extra_body={
+            "think": False
+        },
     )
 
 # ---------------------------------------------------------
