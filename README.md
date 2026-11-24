@@ -124,29 +124,7 @@ This is the blueprint for all features you will develop.
 
 The multi-agent system requires a `.env` file so the agents know **which LLM to call**, **where the API is hosted**, and **how to communicate with your remote LLM (e.g., ChatGPT or Ollama server)**.
 
-You must create a `.env` file in the **project root** with the following structure:
-
-```
-# --- LLM CONFIG (required) ---
-
-# The name of the model you pulled into the remote Ollama server.
-# Example: ollama pull devstral
-# !NOTE: the context window needs to be large enough, e.g., 32k otherwise it will not properly configure the tool calls!
-LLM_MODEL=ollama/devstral-32k:latest
-# LLM_MODEL=openai/gpt-4.1
-
-# The OpenAI-compatible API endpoint exposed by the remote Ollama container.
-# This should point to your remote machine, VPN-accessible host, or LAN host.
-LLM_API_BASE=YOUR_IP_HERE
-# LLM_API_BASE=https://api.openai.com/v1
-
-# Ollama ignores API keys, but the OpenHands SDK requires the field.
-# You may put any string here.
-LLM_API_KEY=dummy
-# LLM_API_KEY=YOUR_CHATGPT_KEY_HERE
-```
-
-This works as well for ChatGPT or similar, just replace the URL and use your key
+You must create a `.env` file in the **project root** with the following structure (use the one provided to you).
 
 ---
 
